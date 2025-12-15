@@ -1,0 +1,23 @@
+import requests
+import re
+
+# Website URL
+url = "https://example.com"
+
+# Fetch webpage content
+response = requests.get(url)
+html = response.text
+
+# Extract title using regex
+title_match = re.search(r"<title>(.*?)</title>", html)
+
+if title_match:
+    title = title_match.group(1)
+
+    # Save the title into a file
+    with open("title.txt", "w") as f:
+        f.write(title)
+
+    print("✅ Webpage title saved to title.txt!")
+else:
+    print("❌ Could not find title in webpage.")
